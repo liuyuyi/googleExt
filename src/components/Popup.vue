@@ -1,8 +1,6 @@
 <template>
   <div class="popup-wrap">
-    <p
-        Popup.html{{ defaultText }}
-    </p>
+    <p>Popup.html{{ defaultText }}</p>
     <div @click="handlerSend">向content发送</div>
   </div>
 </template>
@@ -10,9 +8,9 @@
 <script>
 export default {
   name: 'Popup',
-  data(){
+  data() {
     return {
-      tab: null
+      tab: null,
     }
   },
   async mounted() {
@@ -23,7 +21,7 @@ export default {
       active: true,
       currentWindow: true,
     })
-    if(tab){
+    if (tab) {
       this.tab = tab
     }
     console.log('tab', tab)
@@ -33,16 +31,16 @@ export default {
       return chrome.i18n.getMessage('extName')
     },
   },
-  methods:{
-    handlerSend(){
+  methods: {
+    handlerSend() {
       if (this.tab) {
         // 使用 chrome.tabs.sendMessage 发送消息
         chrome.tabs.sendMessage(this.tab.id, {
           action: 'fromPopup2Content',
         })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
